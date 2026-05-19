@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Freelancer Portfolio – VA & Recruiting</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--navy:#0f1f3d;--teal:#1a7f6e;--teal-light:#e6f5f2;--gold:#c9953a;--gold-light:#fdf5e8;--cream:#faf8f4;--text:#1c1c1c;--muted:#6b6b6b;--border:#e4e0d8;--white:#ffffff}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);line-height:1.7}
+  nav{background:var(--navy);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+  .nav-logo{font-family:'DM Serif Display',serif;color:var(--white);font-size:1.3rem}
+  .nav-logo span{color:#7dd4c8}
+  nav ul{display:flex;gap:1.5rem;list-style:none}
+  nav ul a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.2s}
+  nav ul a:hover{color:#7dd4c8}
+  .hero{background:var(--navy);padding:6rem 2rem 5rem;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(26,127,110,0.12);top:-200px;right:-150px}
+  .hero::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(201,149,58,0.08);bottom:-150px;left:-100px}
+  .hero-badge{display:inline-block;background:rgba(125,212,200,0.15);color:#7dd4c8;border:1px solid rgba(125,212,200,0.3);border-radius:50px;padding:0.35rem 1rem;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem}
+  .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);color:var(--white);line-height:1.2;margin-bottom:1rem;position:relative;z-index:1}
+  .hero h1 em{font-style:italic;color:#7dd4c8}
+  .hero-sub{color:rgba(255,255,255,0.65);font-size:1.05rem;max-width:540px;margin:0 auto 2.5rem;position:relative;z-index:1}
+  .hero-cta{display:inline-flex;align-items:center;gap:0.5rem;background:var(--teal);color:var(--white);padding:0.85rem 2rem;border-radius:50px;font-weight:600;text-decoration:none;font-size:0.95rem;transition:background 0.2s,transform 0.15s;position:relative;z-index:1}
+  .hero-cta:hover{background:#158a78;transform:translateY(-2px)}
+  .stats{background:var(--white);border-bottom:1px solid var(--border);display:flex;justify-content:center;flex-wrap:wrap}
+  .stat{flex:1;min-width:180px;max-width:260px;padding:2rem 1.5rem;text-align:center;border-right:1px solid var(--border)}
+  .stat:last-child{border-right:none}
+  .stat-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--navy);display:block}
+  .stat-label{font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;font-weight:500}
+  section{padding:5rem 2rem;max-width:960px;margin:0 auto}
+  .section-tag{display:inline-block;background:var(--teal-light);color:var(--teal);border-radius:4px;padding:0.25rem 0.75rem;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.75rem}
+  h2{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--navy);margin-bottom:0.5rem;line-height:1.25}
+  .section-intro{color:var(--muted);max-width:580px;margin-bottom:3rem;font-size:1rem}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+  .about-text p{color:var(--text);margin-bottom:1rem;font-size:0.97rem}
+  .about-skills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
+  .skill-tag{background:var(--navy);color:rgba(255,255,255,0.9);padding:0.3rem 0.8rem;border-radius:50px;font-size:0.78rem;font-weight:500}
+  .about-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.75rem}
+  .about-card h3{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:1rem}
+  .about-list{list-style:none}
+  .about-list li{padding:0.5rem 0;font-size:0.9rem;color:var(--text);display:flex;align-items:flex-start;gap:0.6rem;border-bottom:1px solid var(--border)}
+  .about-list li:last-child{border-bottom:none}
+  .about-list li::before{content:'✓';color:var(--teal);font-weight:700;margin-top:1px;flex-shrink:0}
+  #experience{background:var(--white);max-width:100%;padding:5rem 2rem}
+  #experience>*{max-width:960px;margin-left:auto;margin-right:auto}
+  .exp-timeline{position:relative;padding-left:2rem}
+  .exp-timeline::before{content:'';position:absolute;left:0;top:0.6rem;bottom:0.6rem;width:2px;background:var(--border)}
+  .exp-item{position:relative;margin-bottom:2.5rem}
+  .exp-item:last-child{margin-bottom:0}
+  .exp-dot{position:absolute;left:-2.4rem;top:0.5rem;width:14px;height:14px;border-radius:50%;background:var(--teal);border:3px solid var(--white);box-shadow:0 0 0 2px var(--teal)}
+  .exp-card{background:var(--cream);border:1px solid var(--border);border-radius:16px;padding:1.75rem}
+  .exp-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem}
+  .exp-role{font-weight:600;font-size:1.05rem;color:var(--navy)}
+  .exp-company{font-size:0.88rem;color:var(--teal);font-weight:500;margin-top:0.15rem}
+  .exp-date{font-size:0.78rem;background:var(--teal-light);color:var(--teal);padding:0.25rem 0.75rem;border-radius:50px;font-weight:600;white-space:nowrap}
+  .exp-body p{font-size:0.92rem;color:var(--text);margin-bottom:1rem}
+  .exp-achievements{list-style:none}
+  .exp-achievements li{font-size:0.88rem;color:var(--text);padding:0.4rem 0;display:flex;align-items:flex-start;gap:0.6rem;border-bottom:1px solid var(--border)}
+  .exp-achievements li:last-child{border-bottom:none}
+  .exp-achievements li::before{content:'→';color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px}
+  .exp-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem}
+  .exp-tag{background:var(--navy);color:rgba(255,255,255,0.85);padding:0.2rem 0.65rem;border-radius:50px;font-size:0.73rem;font-weight:500}
+  .exp-highlight{background:var(--navy);border-radius:12px;padding:1rem 1.25rem;margin-top:1rem;display:flex;align-items:center;gap:1rem}
+  .exp-highlight-num{font-family:'DM Serif Display',serif;font-size:2rem;color:#7dd4c8;flex-shrink:0}
+  .exp-highlight-text{font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.5}
+  #services{background:var(--cream);max-width:100%;padding:5rem 2rem}
+  #services>*{max-width:960px;margin-left:auto;margin-right:auto}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:960px;margin:0 auto}
+  .service-card{border:1px solid var(--border);border-radius:16px;padding:1.75rem;background:var(--white);transition:border-color 0.2s,transform 0.15s}
+  .service-card:hover{border-color:var(--teal);transform:translateY(-3px)}
+  .service-icon{width:48px;height:48px;background:var(--teal-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem}
+  .service-card h3{font-weight:600;font-size:1rem;color:var(--navy);margin-bottom:0.5rem}
+  .service-card p{font-size:0.88rem;color:var(--muted);line-height:1.6}
+  .recruiting-showcase{margin-top:3rem}
+  .showcase-label{font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);margin-bottom:1.25rem}
+  .sourcing-table-wrap{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:2rem}
+  .sourcing-table-header{background:var(--navy);padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
+  .sourcing-table-header span{color:var(--white);font-size:0.88rem;font-weight:600}
+  .sourcing-table-header small{color:rgba(125,212,200,0.8);font-size:0.75rem}
+  table{width:100%;border-collapse:collapse;font-size:0.84rem}
+  th{background:var(--cream);color:var(--navy);font-weight:600;text-align:left;padding:0.75rem 1rem;border-bottom:1px solid var(--border);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em}
+  td{padding:0.85rem 1rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--cream)}
+  .fit-badge{display:inline-block;padding:0.2rem 0.6rem;border-radius:50px;font-size:0.72rem;font-weight:600}
+  .fit-strong{background:#e6f5f2;color:#0f5c4e}
+  .fit-good{background:#fdf5e8;color:#8a5c10}
+  .outreach-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+  .outreach-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .outreach-card-top{padding:0.6rem 1rem;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+  .outreach-card-top.warm{background:var(--teal-light);color:var(--teal)}
+  .outreach-card-top.direct{background:var(--gold-light);color:#8a5c10}
+  .outreach-card-body{padding:1rem;font-size:0.83rem;color:var(--text);line-height:1.6}
+  .outreach-card-body strong{color:var(--navy);display:block;margin-bottom:0.4rem;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;font-weight:600}
+
+  /* BLOG POSTS */
+  .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+  .blog-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .blog-top{height:8px;background:var(--teal)}
+  .blog-top.gold{background:var(--gold)}
+  .blog-top.navy{background:var(--navy)}
+  .blog-meta-row{padding:1.25rem 1.5rem 0}
+  .blog-category{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.4rem}
+  .blog-category.gold{color:var(--gold)}
+  .blog-category.navy{color:var(--navy)}
+  .blog-card h3{font-weight:600;font-size:0.97rem;color:var(--navy);line-height:1.4;margin-bottom:0.5rem}
+  .blog-pills{display:flex;gap:0.5rem;flex-wrap:wrap;padding:0 1.5rem 1rem}
+  .blog-pill{background:var(--cream);border:1px solid var(--border);border-radius:50px;padding:0.15rem 0.6rem;font-size:0.72rem;color:var(--muted);font-weight:500}
+  .blog-toggle{background:none;border:none;width:100%;padding:0.75rem 1.5rem;text-align:left;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--teal);cursor:pointer;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;transition:background 0.15s}
+  .blog-toggle:hover{background:var(--teal-light)}
+  .blog-toggle .arrow{transition:transform 0.25s;font-size:0.9rem}
+  .blog-toggle.open .arrow{transform:rotate(180deg)}
+  .blog-content{display:none;padding:1.25rem 1.5rem 1.5rem;border-top:1px solid var(--border);font-size:0.88rem;color:var(--text);line-height:1.75}
+  .blog-content.visible{display:block}
+  .blog-content h4{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--navy);margin:1.1rem 0 0.4rem}
+  .blog-content h4:first-child{margin-top:0}
+  .blog-content p{margin-bottom:0.85rem}
+  .blog-content p:last-child{margin-bottom:0}
+  .blog-content ul{padding-left:1.2rem;margin-bottom:0.85rem}
+  .blog-content ul li{margin-bottom:0.35rem}
+  .blog-word-count{font-size:0.75rem;color:var(--muted);margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border)}
+
+  .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+  .process-step{background:var(--white);padding:2rem 1.5rem;text-align:center}
+  .step-num{font-family:'DM Serif Display',serif;font-size:2.5rem;color:var(--teal-light);-webkit-text-stroke:2px var(--teal);display:block;margin-bottom:0.75rem}
+  .process-step h3{font-weight:600;font-size:0.95rem;color:var(--navy);margin-bottom:0.4rem}
+  .process-step p{font-size:0.82rem;color:var(--muted)}
+  .pitch-box{background:var(--navy);border-radius:20px;padding:3.5rem;text-align:center;position:relative;overflow:hidden}
+  .pitch-box::before{content:'"';font-family:'DM Serif Display',serif;font-size:14rem;color:rgba(125,212,200,0.07);position:absolute;top:-3rem;left:1rem;line-height:1}
+  .pitch-box p{font-family:'DM Serif Display',serif;font-size:clamp(1.2rem,2.5vw,1.6rem);color:var(--white);line-height:1.55;max-width:640px;margin:0 auto 2rem;position:relative;z-index:1}
+  .pitch-box a{display:inline-flex;align-items:center;gap:0.5rem;background:#7dd4c8;color:var(--navy);padding:0.85rem 2rem;border-radius:50px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:background 0.2s,transform 0.15s;position:relative;z-index:1}
+  .pitch-box a:hover{background:#a3e4db;transform:translateY(-2px)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
+  .contact-info p{font-size:0.97rem;color:var(--muted);margin-bottom:2rem}
+  .contact-detail{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;font-size:0.9rem;color:var(--text)}
+  .contact-icon{width:36px;height:36px;background:var(--teal-light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .contact-form{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:2rem}
+  .contact-form h3{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:1.25rem}
+  .form-group{margin-bottom:1rem}
+  .form-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--navy);margin-bottom:0.3rem}
+  .form-group input,.form-group textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:0.65rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--text);background:var(--cream);outline:none;transition:border-color 0.2s}
+  .form-group input:focus,.form-group textarea:focus{border-color:var(--teal)}
+  .form-group textarea{resize:vertical;min-height:100px}
+  .form-btn{width:100%;background:var(--navy);color:var(--white);border:none;border-radius:50px;padding:0.8rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;transition:background 0.2s}
+  .form-btn:hover{background:var(--teal)}
+  footer{background:var(--navy);color:rgba(255,255,255,0.5);text-align:center;padding:2rem;font-size:0.82rem}
+  footer span{color:rgba(125,212,200,0.8)}
+  @media(max-width:640px){
+    .about-grid,.contact-grid,.outreach-cards{grid-template-columns:1fr}
+    nav ul{gap:0.75rem}
+    .pitch-box{padding:2.5rem 1.5rem}
+    .stat{min-width:140px}
+    th,td{padding:0.6rem 0.6rem;font-size:0.76rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Alex<span>.</span>Portfolio</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#samples">Samples</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Available for hire · Recruiting & VA Specialist</div>
+  <h1>Real sourcing experience.<br/><em>Results you can count on.</em></h1>
+  <p class="hero-sub">I'm Alex — a recruiting and VA specialist with hands-on experience sourcing and training candidates at Heirs Insurance and Moniepoint Microfinance Bank. Now bringing that expertise to the digital freelance space.</p>
+  <a href="#contact" class="hero-cta">Let's work together →</a>
+</div>
+
+<div class="stats">
+  <div class="stat"><span class="stat-num">40+</span><span class="stat-label">Marketers Recruited</span></div>
+  <div class="stat"><span class="stat-num">2</span><span class="stat-label">Corporate Roles</span></div>
+  <div class="stat"><span class="stat-num">24h</span><span class="stat-label">Avg. Turnaround</span></div>
+  <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Commitment</span></div>
+</div>
+
+<section id="about">
+  <div class="section-tag">About me</div>
+  <h2>Not entry-level in experience —<br/>just new to Upwork.</h2>
+  <p class="section-intro">I bring real corporate recruiting experience from two well-known Nigerian institutions — and I'm now channelling that expertise into freelance work in the digital space.</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Before coming to Upwork, I spent time in management and relationship roles where sourcing and recruiting candidates was a core part of my job. As a Unit Manager at Heirs Insurance, I sourced Financial Advisers for my team. As a Personal Relationship Manager at Moniepoint Microfinance Bank, I recruited and trained over 40 Marketers from the ground up.</p>
+      <p>That experience taught me how to identify the right people quickly, communicate professionally under pressure, and build teams that actually perform. Those are not skills you pick up from a course — they come from doing the work in real organisations with real stakes.</p>
+      <p>I'm new to Upwork, not to recruiting. I'm here to prove that through every task I take on — starting with yours.</p>
+      <div class="about-skills">
+        <span class="skill-tag">Candidate Sourcing</span>
+        <span class="skill-tag">Recruiting</span>
+        <span class="skill-tag">Team Building</span>
+        <span class="skill-tag">Outreach Messaging</span>
+        <span class="skill-tag">Training & Onboarding</span>
+        <span class="skill-tag">VA Tasks</span>
+      </div>
+    </div>
+    <div class="about-card">
+      <h3>What you can expect</h3>
+      <ul class="about-list">
+        <li>Sourcing grounded in real recruiting experience</li>
+        <li>Tasks completed accurately and on time — every time</li>
+        <li>Clear, proactive communication throughout</li>
+        <li>Instructions followed carefully and precisely</li>
+        <li>Honest updates if I need clarification on anything</li>
+        <li>Genuine availability for long-term collaboration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-tag">Work experience</div>
+  <h2>Where I've done this before</h2>
+  <p class="section-intro">Real roles, real organisations, real results — this is the foundation I'm bringing to every project I take on here.</p>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div><div class="exp-role">Personal Relationship Manager</div><div class="exp-company">Moniepoint Microfinance Bank Inc.</div></div>
+          <span class="exp-date">Previous Role</span>
+        </div>
+        <div class="exp-body">
+          <p>In this role, I was responsible for growing and managing a team of field marketers across my territory. My responsibilities went far beyond relationship management — I was actively sourcing, vetting, onboarding, and training candidates from scratch.</p>
+          <ul class="exp-achievements">
+            <li>Sourced and recruited over 40 Marketers to fill open positions within the bank's network</li>
+            <li>Designed and delivered onboarding and training sessions to get new hires field-ready quickly</li>
+            <li>Screened and filtered candidates based on communication skills, drive, and territory fit</li>
+            <li>Managed ongoing performance and retention of recruited team members</li>
+          </ul>
+          <div class="exp-highlight">
+            <div class="exp-highlight-num">40+</div>
+            <div class="exp-highlight-text">Marketers successfully recruited, onboarded, and trained — building one of the most productive teams in the region.</div>
+          </div>
+          <div class="exp-tags"><span class="exp-tag">Recruiting</span><span class="exp-tag">Team Building</span><span class="exp-tag">Training</span><span class="exp-tag">Onboarding</span><span class="exp-tag">Candidate Screening</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div><div class="exp-role">Unit Manager</div><div class="exp-company">Heirs Insurance Company</div></div>
+          <span class="exp-date">Previous Role</span>
+        </div>
+        <div class="exp-body">
+          <p>As Unit Manager, I led a team of Financial Advisers and was directly responsible for identifying and recruiting new advisers to expand the unit. This required a strong understanding of what makes a high-performing adviser — and the ability to assess candidates accurately and efficiently.</p>
+          <ul class="exp-achievements">
+            <li>Sourced and recruited Financial Advisers to fill open positions within my unit</li>
+            <li>Evaluated candidates for communication ability, sales aptitude, and cultural fit</li>
+            <li>Managed the full pipeline from initial outreach through to offer stage</li>
+            <li>Built and led a team of advisers responsible for growing the unit's client portfolio</li>
+          </ul>
+          <div class="exp-tags"><span class="exp-tag">Candidate Sourcing</span><span class="exp-tag">Team Leadership</span><span class="exp-tag">Financial Services</span><span class="exp-tag">Pipeline Management</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="background:var(--white);max-width:100%;padding:5rem 2rem">
+  <div style="max-width:960px;margin:0 auto">
+    <div class="section-tag">What I do</div>
+    <h2>Services I offer</h2>
+    <p class="section-intro">From finding the right candidates to handling the admin that surrounds hiring — I cover the tasks that keep your recruitment workflow moving.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🔍</div><h3>Candidate Sourcing</h3><p>I search LinkedIn, job boards, and talent databases to identify candidates who match your role criteria — drawing on real experience doing exactly this in corporate environments.</p></div>
+      <div class="service-card"><div class="service-icon">📝</div><h3>Outreach & Messaging</h3><p>Professional outreach messages for recruiting — written in a tone that feels human, not templated. Single messages or full variation sets for different candidate types.</p></div>
+      <div class="service-card"><div class="service-icon">📋</div><h3>Virtual Assistance</h3><p>Research, data entry, inbox management, scheduling, and general admin handled with precision. I follow your systems and keep things moving without needing to be chased.</p></div>
+      <div class="service-card"><div class="service-icon">✍️</div><h3>Content & Writing Support</h3><p>Job descriptions, candidate summaries, and internal documentation drafted clearly — so your team always has what it needs in a format that's easy to use.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="samples">
+  <div class="section-tag">Work samples</div>
+  <h2>Recruiting & sourcing sample work</h2>
+  <p class="section-intro">A candidate sourcing brief, outreach messages, and six full blog posts — all written around recruiting, freelancing, and VA topics relevant to this type of role.</p>
+
+  <div class="recruiting-showcase">
+    <div class="showcase-label">Sample deliverable · Candidate sourcing brief</div>
+    <div class="sourcing-table-wrap">
+      <div class="sourcing-table-header">
+        <span>Role: Digital Marketing Coordinator — Remote</span>
+        <small>5 candidates identified · Practice brief</small>
+      </div>
+      <table>
+        <thead><tr><th>Candidate</th><th>Current Role</th><th>Key Strengths</th><th>Availability</th><th>Fit</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Jamie L.</strong><br/><span style="color:var(--muted);font-size:0.78rem">Lagos, NG · LinkedIn</span></td><td>Social Media Exec<br/><span style="color:var(--muted);font-size:0.78rem">2 yrs exp.</span></td><td>SEO, content scheduling, Canva, Meta Ads</td><td>Immediate</td><td><span class="fit-badge fit-strong">Strong</span></td></tr>
+          <tr><td><strong>Priya M.</strong><br/><span style="color:var(--muted);font-size:0.78rem">Nairobi, KE · LinkedIn</span></td><td>Freelance VA & Writer<br/><span style="color:var(--muted);font-size:0.78rem">3 yrs exp.</span></td><td>Blog writing, email campaigns, WordPress</td><td>2 weeks</td><td><span class="fit-badge fit-strong">Strong</span></td></tr>
+          <tr><td><strong>Daniel O.</strong><br/><span style="color:var(--muted);font-size:0.78rem">Accra, GH · Job board</span></td><td>Marketing Assistant<br/><span style="color:var(--muted);font-size:0.78rem">1 yr exp.</span></td><td>Google Analytics, copywriting, research</td><td>Immediate</td><td><span class="fit-badge fit-good">Good</span></td></tr>
+          <tr><td><strong>Aisha K.</strong><br/><span style="color:var(--muted);font-size:0.78rem">Remote · Upwork</span></td><td>Content Coordinator<br/><span style="color:var(--muted);font-size:0.78rem">2 yrs exp.</span></td><td>Editorial calendars, SEO writing, Trello</td><td>1 week</td><td><span class="fit-badge fit-strong">Strong</span></td></tr>
+          <tr><td><strong>Marcus T.</strong><br/><span style="color:var(--muted);font-size:0.78rem">Cape Town, ZA · LinkedIn</span></td><td>Digital Marketing Intern<br/><span style="color:var(--muted);font-size:0.78rem">6 months exp.</span></td><td>Social scheduling, basic analytics, eager learner</td><td>Immediate</td><td><span class="fit-badge fit-good">Good</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="showcase-label">Sample deliverable · Candidate outreach messages</div>
+    <div class="outreach-cards">
+      <div class="outreach-card">
+        <div class="outreach-card-top warm">Warm / Passive candidate</div>
+        <div class="outreach-card-body"><strong>LinkedIn Message</strong>Hi [Name], I came across your profile and was genuinely impressed by your background in digital marketing. We have a remote coordinator role that looks like a strong match for where you are in your career. No pressure at all, but I'd love to share a few details if you're ever open to a conversation. Hope you're having a great week!</div>
+      </div>
+      <div class="outreach-card">
+        <div class="outreach-card-top direct">Direct / Active job-seeker</div>
+        <div class="outreach-card-body"><strong>LinkedIn Message</strong>Hi [Name], I noticed you're currently open to new opportunities — great timing. We're hiring a remote Digital Marketing Coordinator and your background is exactly what we're looking for. The role is fully remote, long-term, and a great fit for someone ready to grow. Can I send over the full details?</div>
+      </div>
+    </div>
+
+    <div class="showcase-label">Supporting writing samples · Full blog posts (click to read)</div>
+    <div class="blog-grid">
+
+      <!-- POST 1 -->
+      <div class="blog-card">
+        <div class="blog-top"></div>
+        <div class="blog-meta-row">
+          <div class="blog-category">Blog · Recruiting</div>
+          <h3>How to Write a Job Description That Attracts the Right Candidates</h3>
+        </div>
+        <div class="blog-pills"><span class="blog-pill">Recruiting</span><span class="blog-pill">SEO</span><span class="blog-pill">~500 words</span></div>
+        <button class="blog-toggle" onclick="togglePost(this)">Read full post <span class="arrow">▼</span></button>
+        <div class="blog-content">
+          <h4>Introduction</h4>
+          <p>A great candidate starts with a great job description. Yet most businesses lose good applicants before they even apply — simply because their job posts are confusing, vague, or full of corporate jargon that nobody relates to. If you want to attract the right people, you need to write for them.</p>
+          <h4>Be specific about the role</h4>
+          <p>Generic titles like "Sales Ninja" or "Marketing Guru" might feel creative, but they hurt your visibility in search results and confuse candidates who don't know what they're actually applying for. Use clear, searchable job titles — "Sales Representative" or "Digital Marketing Coordinator" — and open with two to three sentences that describe exactly what the person will be doing day to day.</p>
+          <h4>List requirements honestly</h4>
+          <p>One of the biggest mistakes hiring managers make is padding the requirements section with a wishlist. If you list ten "must-haves" when you really need four, you'll filter out strong candidates who self-select out. Separate your true requirements from your nice-to-haves. Be honest about experience levels, and if the role is genuinely entry-level, say so — you'll get far better applications.</p>
+          <h4>Sell the role, not just the company</h4>
+          <p>Candidates want to know what's in it for them. Beyond salary and benefits, tell them what growth looks like, what the team culture is like, and why someone would want to stay long-term. A job description that reads like a list of demands will attract desperate applicants. One that feels like an opportunity will attract motivated ones.</p>
+          <h4>End with a clear call to action</h4>
+          <p>Tell candidates exactly how to apply, what to include, and what happens next. Ambiguity at the application stage loses you good people who don't want to guess. Keep it simple: "Send your CV and a short note about why you're a good fit to [email] by [date]."</p>
+          <p>A well-written job description is the first step in a successful hire. Get it right, and the right people will find you.</p>
+          <div class="blog-word-count">~490 words · SEO-optimised · Written by Alex</div>
+        </div>
+      </div>
+
+      <!-- POST 2 -->
+      <div class="blog-card">
+        <div class="blog-top gold"></div>
+        <div class="blog-meta-row">
+          <div class="blog-category gold">Blog · Freelancing</div>
+          <h3>5 Things Every Freelancer Should Know Before Taking Their First Job</h3>
+        </div>
+        <div class="blog-pills"><span class="blog-pill">Freelancing</span><span class="blog-pill">SEO</span><span class="blog-pill">~500 words</span></div>
+        <button class="blog-toggle" onclick="togglePost(this)">Read full post <span class="arrow">▼</span></button>
+        <div class="blog-content">
+          <h4>Introduction</h4>
+          <p>Taking your first freelance job is exciting — and terrifying in equal measure. You want to impress your client, deliver great work, and come away with a five-star review. But many new freelancers make avoidable mistakes in those first few jobs that cost them time, money, and repeat business. Here are five things worth knowing before you start.</p>
+          <h4>1. Clarify the brief before you begin</h4>
+          <p>Never assume. If the job description is vague, ask questions before you accept the work — not halfway through. A quick message asking for clarification shows professionalism, not incompetence. It also protects you from scope creep, which is when a client keeps adding to the original task without adjusting the pay.</p>
+          <h4>2. Agree on payment terms upfront</h4>
+          <p>Know when you'll be paid, how you'll be paid, and what happens if a client requests revisions. On platforms like Upwork, this is built into the system — but always read the contract carefully before accepting. Never begin work on a project where payment hasn't been agreed or funded.</p>
+          <h4>3. Communicate even when there's nothing to report</h4>
+          <p>Clients worry when they don't hear from you. A short update message — "I've started on this and will have a draft to you by tomorrow afternoon" — goes a long way. Proactive communication builds trust faster than any deliverable.</p>
+          <h4>4. Deliver exactly what was asked</h4>
+          <p>It sounds obvious, but many new freelancers deliver what they think the client wants, rather than what was actually requested. Read the brief twice. If you've made a decision that wasn't specified, flag it. Don't surprise your client.</p>
+          <h4>5. Ask for a review — politely</h4>
+          <p>Once the job is done, it's completely acceptable to ask a satisfied client for a review. Most happy clients don't think to leave one unprompted. A simple message like "I really enjoyed working on this — if you're happy with the result, a short review would mean a lot as I build my profile" is warm, professional, and effective.</p>
+          <p>Your first few jobs set the tone for your entire freelance career. Take them seriously, communicate clearly, and deliver on time — the rest will follow.</p>
+          <div class="blog-word-count">~490 words · SEO-optimised · Written by Alex</div>
+        </div>
+      </div>
+
+      <!-- POST 3 -->
+      <div class="blog-card">
+        <div class="blog-top navy"></div>
+        <div class="blog-meta-row">
+          <div class="blog-category navy">Blog · Remote Work</div>
+          <h3>Why Remote Teams Are Turning to Virtual Assistants to Scale Faster</h3>
+        </div>
+        <div class="blog-pills"><span class="blog-pill">VA</span><span class="blog-pill">SEO</span><span class="blog-pill">~550 words</span></div>
+        <button class="blog-toggle" onclick="togglePost(this)">Read full post <span class="arrow">▼</span></button>
+        <div class="blog-content">
+          <h4>Introduction</h4>
+          <p>Growing a remote business is exciting — until the admin catches up with you. Emails pile up. Research takes all morning. Scheduling becomes a full-time job in itself. This is the moment most smart founders and team leads discover the power of a virtual assistant. And once they do, they rarely go back.</p>
+          <h4>What a VA actually does</h4>
+          <p>A virtual assistant is a remote professional who handles the operational and administrative tasks that drain your time without requiring your specific expertise. This includes inbox management, scheduling, data entry, research, content drafting, customer follow-up, and more. Crucially, a good VA doesn't just complete tasks — they free you to focus on the work that only you can do.</p>
+          <h4>The scaling advantage</h4>
+          <p>Hiring a full-time employee comes with significant overhead — salary, benefits, desk space, onboarding time. A VA gives you flexible, skilled support at a fraction of the cost. You can start with five hours a week and scale up as your workload grows, without the commitment of a permanent hire. For remote-first teams especially, this flexibility is invaluable.</p>
+          <h4>What to delegate first</h4>
+          <p>The best way to start is by tracking your week and identifying the tasks that are repetitive, time-consuming, and don't require your decision-making. Common first delegations include:</p>
+          <ul>
+            <li>Responding to routine emails and enquiries</li>
+            <li>Scheduling meetings and managing calendars</li>
+            <li>Researching candidates, suppliers, or market data</li>
+            <li>Preparing reports or summaries from existing data</li>
+            <li>Updating spreadsheets or CRM records</li>
+          </ul>
+          <h4>How to onboard a VA effectively</h4>
+          <p>The biggest mistake teams make is hiring a VA and expecting them to figure things out. Give your VA clear instructions, documented processes, and specific examples of what "good" looks like. A short briefing document or a 15-minute onboarding call will save hours of back-and-forth later. The more clearly you communicate your expectations, the faster your VA can operate independently.</p>
+          <p>Remote teams that scale quickly aren't doing more work — they're working smarter by delegating well. A great VA isn't a luxury; for a growing business, it's one of the smartest investments you can make.</p>
+          <div class="blog-word-count">~520 words · SEO-optimised · Written by Alex</div>
+        </div>
+      </div>
+
+      <!-- POST 4 -->
+      <div class="blog-card">
+        <div class="blog-top"></div>
+        <div class="blog-meta-row">
+          <div class="blog-category">Blog · Recruiting</div>
+          <h3>The Top Benefits of Using a Freelancer for Candidate Sourcing</h3>
+        </div>
+        <div class="blog-pills"><span class="blog-pill">Recruiting</span><span class="blog-pill">SEO</span><span class="blog-pill">~450 words</span></div>
+        <button class="blog-toggle" onclick="togglePost(this)">Read full post <span class="arrow">▼</span></button>
+        <div class="blog-content">
+          <h4>Introduction</h4>
+          <p>Finding the right candidates takes time — time that most hiring managers and business owners simply don't have. That's why a growing number of companies are turning to freelance sourcers to handle the early stages of recruitment. It's faster, more cost-effective, and surprisingly flexible. Here's why it works.</p>
+          <h4>You only pay for what you need</h4>
+          <p>Unlike a full-time recruiter, a freelance sourcer works on demand. Need five candidates for a single role? You pay for that. Don't have another hire for three months? No ongoing cost. This model is especially useful for small businesses and startups that don't have the volume to justify a permanent recruiting function.</p>
+          <h4>You get focused, dedicated attention</h4>
+          <p>An in-house hiring manager is juggling interviews, onboarding, HR admin, and sourcing all at once. A freelance sourcer is focused entirely on finding candidates for your role. That focus translates into faster turnaround and higher-quality shortlists.</p>
+          <h4>Sourcing is a skill — not just a search</h4>
+          <p>Effective candidate sourcing isn't just running a LinkedIn search and sending a list of names. It involves understanding the role requirements, identifying the right platforms, filtering candidates for genuine fit, and presenting them in a format that makes the hiring manager's job easier. An experienced sourcer brings a structured process that saves time at every stage.</p>
+          <h4>It scales with your needs</h4>
+          <p>Whether you're hiring one person or ten, a freelance sourcer can adapt. You can increase or reduce the scope of work based on your current pipeline — something that's much harder to do with an internal team member whose salary is fixed.</p>
+          <p>If your recruitment process is slow, expensive, or inconsistent, outsourcing your candidate sourcing to a focused freelancer could be the simplest fix you haven't tried yet.</p>
+          <div class="blog-word-count">~430 words · SEO-optimised · Written by Alex</div>
+        </div>
+      </div>
+
+      <!-- POST 5 -->
+      <div class="blog-card">
+        <div class="blog-top gold"></div>
+        <div class="blog-meta-row">
+          <div class="blog-category gold">Blog · Freelancing</div>
+          <h3>How to Build a Freelance Profile That Gets You Hired on Upwork</h3>
+        </div>
+        <div class="blog-pills"><span class="blog-pill">Upwork</span><span class="blog-pill">SEO</span><span class="blog-pill">~500 words</span></div>
+        <button class="blog-toggle" onclick="togglePost(this)">Read full post <span class="arrow">▼</span></button>
+        <div class="blog-content">
+          <h4>Introduction</h4>
+          <p>Your Upwork profile is your storefront. Clients look at it for less than thirty seconds before deciding whether to message you or move on. If it doesn't immediately communicate who you are, what you do, and why you're the right choice — they're gone. Here's how to build a profile that actually gets you hired.</p>
+          <h4>Start with a strong headline</h4>
+          <p>Your headline appears under your name and is one of the first things a client reads. Don't waste it on vague phrases like "hardworking freelancer" or "experienced professional." Be specific: "Candidate Sourcing & VA Specialist | Recruiting Background in Financial Services" tells a client exactly who you are in under ten seconds.</p>
+          <h4>Write your overview for the client, not yourself</h4>
+          <p>Most freelancers write their profile overview as a personal statement — "I am a dedicated worker with five years of experience..." — but clients don't care about you yet. They care about their problem. Open your overview by speaking directly to what they need: "If you need candidates sourced quickly and accurately, I can help." Then back it up with your experience and skills.</p>
+          <h4>Show proof, not promises</h4>
+          <p>Anyone can claim to be detail-oriented and reliable. What actually builds trust is evidence. Reference specific results from previous roles, add portfolio samples that demonstrate your output, and be precise about what you've done — not just what you're capable of.</p>
+          <h4>Set your rate deliberately</h4>
+          <p>New freelancers often undercut themselves dramatically hoping it will attract clients faster. In reality, extremely low rates can signal low quality. Research what others in your niche charge, price competitively but not desperately, and be ready to raise your rate once you have reviews.</p>
+          <h4>Apply to jobs like a human, not a bot</h4>
+          <p>When sending proposals, read the job post carefully and respond to what the client actually wrote. Reference something specific from their post. Start with "mouse" if they asked you to — those small details signal that you pay attention, and paying attention is exactly what every client is hiring for.</p>
+          <p>A strong profile won't guarantee your first job, but a weak one will definitely cost you it. Invest the time upfront and it pays dividends every time a client lands on your page.</p>
+          <div class="blog-word-count">~500 words · SEO-optimised · Written by Alex</div>
+        </div>
+      </div>
+
+      <!-- POST 6 -->
+      <div class="blog-card">
+        <div class="blog-top navy"></div>
+        <div class="blog-meta-row">
+          <div class="blog-category navy">Blog · Remote Work</div>
+          <h3>What to Look for When Hiring a Virtual Assistant for the First Time</h3>
+        </div>
+        <div class="blog-pills"><span class="blog-pill">VA</span><span class="blog-pill">SEO</span><span class="blog-pill">~550 words</span></div>
+        <button class="blog-toggle" onclick="togglePost(this)">Read full post <span class="arrow">▼</span></button>
+        <div class="blog-content">
+          <h4>Introduction</h4>
+          <p>Hiring your first virtual assistant is one of the highest-leverage decisions a growing business can make. But getting it wrong — hiring someone who needs constant hand-holding, misses deadlines, or disappears mid-project — can put you off the whole idea. Here's what to look for to get it right the first time.</p>
+          <h4>Communication comes first</h4>
+          <p>Before skills, before experience, before anything else — look at how a candidate communicates. Are their messages clear and professional? Do they respond promptly? Do they ask intelligent questions? A VA who communicates well will be a pleasure to work with even when they're still learning your systems. One who doesn't will cause friction no matter how skilled they are.</p>
+          <h4>Look for evidence, not claims</h4>
+          <p>Every applicant will describe themselves as detail-oriented, reliable, and hardworking. What separates the good from the great is evidence. Look for candidates who can point to specific tasks they've completed, share samples of their work, or describe past roles where they handled similar responsibilities. Vague claims are cheap. Concrete proof is not.</p>
+          <h4>Start with a paid test task</h4>
+          <p>Rather than committing to a long-term contract immediately, offer a small paid test task that mirrors the work you'll actually need done. This gives you a real sample of their output, shows how they handle instructions, and reveals their turnaround time. It also gives the VA a fair chance to show what they can do without the pressure of an all-or-nothing audition.</p>
+          <h4>Prioritise reliability over perfection</h4>
+          <p>A VA who delivers good work consistently on time is worth more than one who occasionally produces brilliant work but misses deadlines and goes quiet for days. Reliability is the foundation everything else is built on. In your first conversation, pay attention to whether they're clear about their availability, response times, and how they handle competing priorities.</p>
+          <h4>Set expectations early</h4>
+          <p>The most common reason VA relationships fail isn't incompetence — it's unclear expectations. Before your VA starts, document exactly what you need, how you want it delivered, and what good looks like. The clearer you are upfront, the faster they can operate without supervision, and the more value you'll get from day one.</p>
+          <p>The right VA won't just save you time — they'll make your entire operation run more smoothly. Take the hiring process seriously, and you'll find a partner who grows with your business.</p>
+          <div class="blog-word-count">~530 words · SEO-optimised · Written by Alex</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="section-tag">My approach</div>
+  <h2>How I work</h2>
+  <p class="section-intro">Simple, predictable, and always focused on getting things right the first time.</p>
+  <div class="process-steps">
+    <div class="process-step"><span class="step-num">01</span><h3>Read carefully</h3><p>I study the brief thoroughly and ask clarifying questions before I start — not after.</p></div>
+    <div class="process-step"><span class="step-num">02</span><h3>Research & source</h3><p>I dig in with focus, pulling from the right platforms and filtering for quality.</p></div>
+    <div class="process-step"><span class="step-num">03</span><h3>Deliver cleanly</h3><p>Work submitted on time, well-formatted, and genuinely ready to use.</p></div>
+    <div class="process-step"><span class="step-num">04</span><h3>Refine & grow</h3><p>I welcome feedback and improve with every task I complete.</p></div>
+  </div>
+</section>
+
+<section style="padding:2rem 2rem 5rem;max-width:960px;margin:0 auto">
+  <div class="pitch-box">
+    <p>"I recruited and trained over 40 people in my last role. I know what it takes to find the right candidate — and I bring that same standard to every task I take on here."</p>
+    <a href="#contact">Hire me for your project →</a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-tag">Get in touch</div>
+  <h2>Let's work together</h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p>Available to start immediately. Open to short tasks and long-term roles alike. Whether you need a single sourcing brief or an ongoing recruiting partner, let's talk.</p>
+      <div class="contact-detail"><div class="contact-icon">🌍</div>Available remotely · Worldwide</div>
+      <div class="contact-detail"><div class="contact-icon">⚡</div>Response time under 2 hours</div>
+      <div class="contact-detail"><div class="contact-icon">🤝</div>Open to long-term collaboration</div>
+    </div>
+    <div class="contact-form">
+      <h3>Send a message</h3>
+      <div class="form-group"><label>Your name</label><input type="text" placeholder="e.g. Sarah Johnson"/></div>
+      <div class="form-group"><label>Email address</label><input type="email" placeholder="your@email.com"/></div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell me about the role or task you need help with..."></textarea></div>
+      <button class="form-btn">Send message</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with intention · <span>Open to work</span> · Recruiting & VA Specialist Portfolio &copy; 2026</p>
+</footer>
+
+<script>
+function togglePost(btn){
+  const content=btn.nextElementSibling;
+  const isOpen=content.classList.contains('visible');
+  content.classList.toggle('visible',!isOpen);
+  btn.classList.toggle('open',!isOpen);
+  btn.querySelector('.arrow').textContent=isOpen?'▼':'▲';
+}
+</script>
+</body>
+</html>
